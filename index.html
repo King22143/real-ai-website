@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>🤖 Real AI</h2>
+
+<textarea id="q"></textarea><br><br>
+<button onclick="ask()">Ask AI</button>
+<p id="a"></p>
+
+<script>
+async function ask() {
+  let q = document.getElementById("q").value;
+  let r = await fetch("/api/ask", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({question: q})
+  });
+  let d = await r.json();
+  document.getElementById("a").innerText = d.answer;
+}
+</script>
+</body>
+</html>
